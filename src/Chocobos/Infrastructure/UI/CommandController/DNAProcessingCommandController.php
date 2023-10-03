@@ -8,7 +8,7 @@ use AK\Shared\Domain\Bus\Command\CommandBus;
 use AK\Shared\Domain\Bus\Query\QueryBus;
 use AK\Shared\Infrastructure\UI\CommandController\BaseCommandController;
 
-class OrderProcessingCommandController extends BaseCommandController
+class DNAProcessingCommandController extends BaseCommandController
 {
     public function __construct(
         public QueryBus    $queryBus,
