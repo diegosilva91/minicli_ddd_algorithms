@@ -1,0 +1,23 @@
+#!/usr/bin/php
+<?php
+
+if (php_sapi_name() !== 'cli') {
+    exit;
+}
+require __DIR__ . '/../vendor/autoload.php';
+
+use AK\App;
+use AK\ChocoBilly\Infrastructure\UI\CommandController\OrderProcessingCommandController;
+use AK\Shared\Domain\Bus\Query\Query;
+use AK\Shared\Infrastructure\Bus\SimpleQueryBus;
+use AK\Shared\Infrastructure\UI\CommandController\CommandCall;
+//chocobilly orderprocessingcommand
+$app = new App();
+$app->setSignature("minicli chocobilly orderprocessingcommand [ user=name ]");
+
+$app->registerCommand("help", function(CommandCall $call) use ($app) {
+    $app->printSignature();
+    print_r($call->params);
+});
+
+$app->runCommand($argv);
