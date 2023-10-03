@@ -20,4 +20,6 @@ $app->registerCommand("help", function(CommandCall $call) use ($app) {
     print_r($call->params);
 });
 
+$app->setSignature("minicli chocobos orderprocessingcommand [ user=name ]");
+
 $app->runCommand($argv);
