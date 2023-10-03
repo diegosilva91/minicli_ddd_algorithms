@@ -6,8 +6,6 @@ class OrderLine
 {
     protected array $weights_available = [];
 
-    protected int $count;
-
     public function getWeightsAvailable(): array
     {
         return $this->weights_available;
@@ -20,7 +18,7 @@ class OrderLine
 
     public function getCount(): int
     {
-        return $this->count;
+        return count($this->weights_available);
     }
 
     public function getTotalWeightAvailable(): float|int
