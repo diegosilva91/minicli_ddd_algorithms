@@ -1,8 +1,9 @@
 <?php
 
-namespace AK\ChocoBilly\Infrastructure\UI\CommandController;
+namespace AK\Chocobos\Infrastructure\UI\CommandController;
 
-use AK\ChocoBilly\Application\ProcessOrder\ProcessOrderCommand;
+use AK\Chocobos\Application\DNAModification\DNAModificationQuery;
+use AK\Chocobos\Application\ProcessDNA\ProcessDNACommand;
 use AK\Shared\Application\GetContentFile\GetContentFileQuery;
 use AK\Shared\Domain\Bus\Command\CommandBus;
 use AK\Shared\Domain\Bus\Query\QueryBus;
@@ -25,14 +26,22 @@ class DNAProcessingCommandController extends BaseCommandController
         $queryFile = new GetContentFileQuery("Chocobos/input.txt");
         $content = $this->queryBus->ask($queryFile);
 
-        $this->commandBus->dispatch(
+
+        $dataFiles = $this->queryBus->ask(
             new DNAModificationQuery($content)
         );
 
-        $queryFileOutput = new GetContentFileQuery("Chocobos/output.txt");
+        $this->commandBus->dispatch(
+            new ProcessDNACommand($dataFiles['dataObjects'])
+        );
+
+        $contentFileOutput = $this->queryBus->ask(
+            new GetContentFileQuery("Chocobos/output.txt")
+        );
+
         $this->getPrinter()->display(sprintf("Order generated in folder storage!"));
 
-        foreach ($queryFileOutput as $item) {
+        foreach ($contentFileOutput as $item) {
             $this->getPrinter()->display($item);
         }
     }

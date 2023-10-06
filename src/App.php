@@ -4,6 +4,8 @@ namespace AK;
 
 use AK\ChocoBilly\Domain\Repository\BirdsRepository;
 use AK\ChocoBilly\Infrastructure\Service\BirdsService;
+use AK\Chocobos\Domain\Repository\DNACloningRepository;
+use AK\Chocobos\Infrastructure\Service\DNACloning;
 use AK\Shared\Domain\Adapter\FileReaderInterface;
 use AK\Shared\Domain\Bus\Command\CommandBus;
 use AK\Shared\Domain\Bus\Handler;
@@ -199,6 +201,8 @@ class App
         $this->container->bind(CommandBus::class, SimpleCommandBus::class);
         $this->container->bind(FileReaderInterface::class, ReadFile::class);
         $this->container->bind(BirdsRepository::class, BirdsService::class);
+
+          $this->container->bind(DNACloningRepository::class, DNACloning::class);
     }
 
     protected function loadServices(): void

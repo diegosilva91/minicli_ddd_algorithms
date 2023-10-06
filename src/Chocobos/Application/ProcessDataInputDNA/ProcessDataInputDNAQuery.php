@@ -1,10 +1,10 @@
 <?php
 
-namespace AK\Chocobos\Application\DNAModification;
+namespace AK\Chocobos\Application\ProcessDataInputDNA;
 
 use AK\Shared\Domain\Bus\Query\Query;
 
-class DNAModificationQuery extends Query
+class ProcessDataInputDNAQuery extends Query
 {
     public function __construct(
         protected array $content

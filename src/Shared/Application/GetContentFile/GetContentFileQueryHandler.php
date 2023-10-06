@@ -20,7 +20,9 @@ class GetContentFileQueryHandler implements QueryHandler
         $input = __DIR__ . "/../../../../storage/";
 
         $content = $this->fileReader->read($input . $fileName);
-        $this->validateContent($content);
+        if ($getContentFileQuery->getNeedValidation()) {
+            $this->validateContent($content);
+        }
         return $content;
     }
 

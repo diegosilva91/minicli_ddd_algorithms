@@ -36,7 +36,6 @@ class ProcessOrderCommandHandler
             $orderLine->setWeightsAvailable($result);
             $order->addOrderLine($orderLine);
         }
-var_dump($order);
         $this->commandBus->dispatch(
             new CreateOrderCommand($order)
         );
